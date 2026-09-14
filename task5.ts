@@ -6,12 +6,8 @@ function addZero(value: number): string {
   return value.toString().padStart(2, "0");
 }
 function getDate(dateString: string): string {
-  const checkFormat = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/;
-  if (!checkFormat.test(dateString)) {
-    return "Неверный формат даты";
-  }
   const now: Date = new Date(dateString);
-  if (isNaN(now.getTime())) {
+  if (Number.isNaN(now.getTime())) {
     return "Некорректная дата";
   }
   const day = addZero(now.getDate());
@@ -25,4 +21,4 @@ function getDate(dateString: string): string {
   const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
   return formattedDate;
 }
-console.log(getDate("2026-10-22T22:10:15"));
+console.log(getDate("111"));
