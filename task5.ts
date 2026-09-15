@@ -2,16 +2,23 @@
 // Саму задачу обернуть в отдельную функцию getDate, которая принимает в качестве параметра произвольную дату в формате '2026-10-22T22:10:15'
 //* Проверить валидна ли дата в переданном параметре
 
-const now: Date = new Date();
+function addZero(value: number): string {
+  return value.toString().padStart(2, "0");
+}
+function getDate(dateString: string): string {
+  const now: Date = new Date(dateString);
+  if (Number.isNaN(now.getTime())) {
+    return "Некорректная дата";
+  }
+  const day = addZero(now.getDate());
+  const month = addZero(now.getMonth() + 1);
+  const year = now.getFullYear();
 
-const day = now.getDate().toString().padStart(2, "0");
-const month = (now.getMonth() + 1).toString().padStart(2, "0");
-const year = now.getFullYear();
+  const hours = addZero(now.getHours());
+  const minutes = addZero(now.getMinutes());
+  const seconds = addZero(now.getSeconds());
 
-const hours = now.getHours().toString().padStart(2, "0");
-const minutes = now.getMinutes().toString().padStart(2, "0");
-const seconds = now.getSeconds().toString().padStart(2, "0");
-
-const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
-
-console.log(formattedDate);
+  const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+  return formattedDate;
+}
+console.log(getDate("111"));
